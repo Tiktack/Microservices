@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "Tiktack.Email.EmailService": {
+      "commandName": "Project"
+    },
+    "Docker": {
+      "commandName": "Docker"
+    }
+  }
+}

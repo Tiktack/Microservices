@@ -1,0 +1,119 @@
+version: '3.7'
+
+services:
+  tiktack.web.api:
+    image: tiktack.web.api
+    build:
+      context: .
+      dockerfile: Tiktack.Web.Api/Dockerfile
+    container_name: tiktack.web.api
+    healthcheck:
+      timeout: 5s
+      interval: 30s
+      retries: 10
+      test: ["CMD-SHELL", "curl --silent --fail localhost:80/healthcheck || exit 1"]
+    depends_on:
+      - rabbitmq
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=https://+:443;http://+:80
+      - ASPNETCORE_HTTPS_PORT=44308
+    ports:
+      - "65319:80"
+      - "44308:443"
+    volumes:
+      - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
+      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
+  
+  tiktack.email.emailservice:
+    image: tiktack.email.emailservice
+    build:
+      context: .
+      dockerfile: Tiktack.Email.EmailService/Dockerfile
+    container_name: tiktack.email.emailservice
+    depends_on:
+      - rabbitmq
+      - redis
+    environment:
+      - PITSTOP_ENVIRONMENT=Production
+
+  redis:
+    image: redis
+    container_name: redis
+    healthcheck:
+      timeout: 5s
+      interval: 30s
+      retries: 10
+      test:
+        - "CMD"
+        - "bash"
+        - "-c"
+        - "exec 3<> /dev/tcp/127.0.0.1/6379 && echo PING >&3 && head -1 <&3 | grep PONG"
+    ports:
+      - "5001:6379"
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rabbitmq
+    healthcheck:
+      timeout: 5s
+      interval: 30s
+      retries: 10
+      test:
+        - "CMD"
+        - "rabbitmqctl"
+        - "status"
+    volumes:
+      - rabbitmqdata:/var/lib/rabbitmq
+    ports:
+      - "15672:15672"
+      - "5672:5672"
+    environment:
+      - RABBITMQ_DEFAULT_USER=rabbitmquser
+      - RABBITMQ_DEFAULT_PASS=DEBmbwkSrzy9D1T9cJfa
+
+  #sqlserver:
+   # image: microsoft/mssql-server-linux:latest
+    #container_name: sqlserver
+    #volumes:
+    #  - sqlserverdata:/var/opt/mssql 
+    #ports:
+    # - "1434:1433"
+    #environment:
+     # - ACCEPT_EULA=Y 
+      #- MSSQL_PID=Developer
+      #- SA_PASSWORD=8jkGh47hnDw89Haq8LN2
+
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:6.6.1
+    container_name: elasticsearch
+    healthcheck:
+        test: ["CMD-SHELL", "curl --silent --fail localhost:9200/_cluster/health || exit 1"]
+        interval: 30s
+        timeout: 30s
+        retries: 10
+    ports:
+      - "9200:9200"
+    volumes:
+      - elasticsearch-data:/usr/share/elasticsearch/data
+
+  kibana:
+    image: docker.elastic.co/kibana/kibana:6.6.1
+    container_name: kibana
+    healthcheck:
+        test: ["CMD-SHELL", "curl --silent --fail localhost:5601/api/status || exit 1"]
+        interval: 30s
+        timeout: 30s
+        retries: 10
+    ports:
+    - "5601:5601"
+    depends_on:
+    - elasticsearch
+
+volumes:
+  elasticsearch-data:
+    external: true
+  sqlserverdata:
+    external: true    
+  rabbitmqdata:
+    external: true

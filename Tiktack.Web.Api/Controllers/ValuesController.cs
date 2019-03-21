@@ -1,8 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using Tiktack.Common.Messaging;
 
 namespace Tiktack.Web.Api.Controllers
 {
@@ -10,6 +10,13 @@ namespace Tiktack.Web.Api.Controllers
     [ApiController]
     public class ValuesController : ControllerBase
     {
+        private readonly IMessagePublisher _messagePublisher;
+
+        public ValuesController(IMessagePublisher messagePublisher)
+        {
+            _messagePublisher = messagePublisher;
+        }
+
         // GET api/values
         [HttpGet]
         public ActionResult<IEnumerable<string>> Get()
@@ -19,8 +26,9 @@ namespace Tiktack.Web.Api.Controllers
 
         // GET api/values/5
         [HttpGet("{id}")]
-        public ActionResult<string> Get(int id)
+        public async Task<ActionResult<string>> Get(int id)
         {
+            await _messagePublisher.PublishMessageAsync("GetMessage", "email message", "");
             return "value";
         }
 

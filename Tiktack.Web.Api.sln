@@ -1,9 +1,31 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.136
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28711.60
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tiktack.Web.Api", "Tiktack.Web.Api\Tiktack.Web.Api.csproj", "{354E66FC-BD1D-4A07-AB2E-2B8A90E6E2A7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tiktack.Web.Api", "Tiktack.Web.Api\Tiktack.Web.Api.csproj", "{354E66FC-BD1D-4A07-AB2E-2B8A90E6E2A7}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web", "Web", "{05C7E9FF-ABDC-4080-867C-F970A6DB9753}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Email", "Email", "{CE09A15A-01F9-4778-A7C5-8C5ADBCF4FE9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Identity", "Identity", "{20FDF0A5-8A2B-4B89-B350-1E2307E3851C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tiktack.Web.DataLayer", "Tiktack.Web.DataLayer\Tiktack.Web.DataLayer.csproj", "{E3973F12-B6E9-4886-88CD-0C0FF168564A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Titkack.Web.Businesslayer", "Titkack.Web.Businesslayer\Titkack.Web.Businesslayer.csproj", "{3D52A72E-1D1C-448E-BD3A-2726E788A11B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{24D48FFD-9FD3-4CCA-92CA-CBE15B2016B3}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tiktack.Common.Core", "Tiktack.Common.Core\Tiktack.Common.Core.csproj", "{3CDA7B2C-BBE8-42A0-8359-25EF6ECCA611}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tiktack.Email.Core", "Tiktack.Email.Core\Tiktack.Email.Core.csproj", "{96C51122-1F01-48EB-B9CF-9DA387B3BECD}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{39CF414D-EA77-45B6-917E-718073B0962B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tiktack.Email.EmailService", "Tiktack.Email.EmailService\Tiktack.Email.EmailService.csproj", "{BA45C860-F050-44FF-B80E-7680954CA678}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tiktack.Common.Messaging", "Tiktack.Common.Messaging\Tiktack.Common.Messaging.csproj", "{DB457F57-E387-43C0-AB99-B1FFC558D2F4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,9 +37,46 @@ Global
 		{354E66FC-BD1D-4A07-AB2E-2B8A90E6E2A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{354E66FC-BD1D-4A07-AB2E-2B8A90E6E2A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{354E66FC-BD1D-4A07-AB2E-2B8A90E6E2A7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E3973F12-B6E9-4886-88CD-0C0FF168564A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E3973F12-B6E9-4886-88CD-0C0FF168564A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E3973F12-B6E9-4886-88CD-0C0FF168564A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E3973F12-B6E9-4886-88CD-0C0FF168564A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3D52A72E-1D1C-448E-BD3A-2726E788A11B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3D52A72E-1D1C-448E-BD3A-2726E788A11B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3D52A72E-1D1C-448E-BD3A-2726E788A11B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3D52A72E-1D1C-448E-BD3A-2726E788A11B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3CDA7B2C-BBE8-42A0-8359-25EF6ECCA611}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3CDA7B2C-BBE8-42A0-8359-25EF6ECCA611}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3CDA7B2C-BBE8-42A0-8359-25EF6ECCA611}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3CDA7B2C-BBE8-42A0-8359-25EF6ECCA611}.Release|Any CPU.Build.0 = Release|Any CPU
+		{96C51122-1F01-48EB-B9CF-9DA387B3BECD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{96C51122-1F01-48EB-B9CF-9DA387B3BECD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{96C51122-1F01-48EB-B9CF-9DA387B3BECD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{96C51122-1F01-48EB-B9CF-9DA387B3BECD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{39CF414D-EA77-45B6-917E-718073B0962B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{39CF414D-EA77-45B6-917E-718073B0962B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{39CF414D-EA77-45B6-917E-718073B0962B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{39CF414D-EA77-45B6-917E-718073B0962B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BA45C860-F050-44FF-B80E-7680954CA678}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BA45C860-F050-44FF-B80E-7680954CA678}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BA45C860-F050-44FF-B80E-7680954CA678}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BA45C860-F050-44FF-B80E-7680954CA678}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DB457F57-E387-43C0-AB99-B1FFC558D2F4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DB457F57-E387-43C0-AB99-B1FFC558D2F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DB457F57-E387-43C0-AB99-B1FFC558D2F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DB457F57-E387-43C0-AB99-B1FFC558D2F4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{354E66FC-BD1D-4A07-AB2E-2B8A90E6E2A7} = {05C7E9FF-ABDC-4080-867C-F970A6DB9753}
+		{E3973F12-B6E9-4886-88CD-0C0FF168564A} = {05C7E9FF-ABDC-4080-867C-F970A6DB9753}
+		{3D52A72E-1D1C-448E-BD3A-2726E788A11B} = {05C7E9FF-ABDC-4080-867C-F970A6DB9753}
+		{3CDA7B2C-BBE8-42A0-8359-25EF6ECCA611} = {24D48FFD-9FD3-4CCA-92CA-CBE15B2016B3}
+		{96C51122-1F01-48EB-B9CF-9DA387B3BECD} = {CE09A15A-01F9-4778-A7C5-8C5ADBCF4FE9}
+		{BA45C860-F050-44FF-B80E-7680954CA678} = {CE09A15A-01F9-4778-A7C5-8C5ADBCF4FE9}
+		{DB457F57-E387-43C0-AB99-B1FFC558D2F4} = {24D48FFD-9FD3-4CCA-92CA-CBE15B2016B3}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {92B9B252-345A-4954-9683-6BD41C11EA47}
