@@ -14,6 +14,7 @@ services:
       test: ["CMD-SHELL", "curl --silent --fail localhost:80/healthcheck || exit 1"]
     depends_on:
       - rabbitmq
+      - sqlserver
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=https://+:443;http://+:80
@@ -36,6 +37,15 @@ services:
       - redis
     environment:
       - PITSTOP_ENVIRONMENT=Production
+
+  tiktack.identity.authserver:
+    image: tiktack.identity.authserver
+    build:
+      context: .
+      dockerfile: Tiktack.Identity.AuthServer/Dockerfile
+    container_name: tiktack.identity.authserver
+    ports:
+    - "50000:80"
 
   redis:
     image: redis
@@ -72,43 +82,43 @@ services:
       - RABBITMQ_DEFAULT_USER=rabbitmquser
       - RABBITMQ_DEFAULT_PASS=DEBmbwkSrzy9D1T9cJfa
 
-  #sqlserver:
-   # image: microsoft/mssql-server-linux:latest
-    #container_name: sqlserver
-    #volumes:
-    #  - sqlserverdata:/var/opt/mssql 
-    #ports:
-    # - "1434:1433"
-    #environment:
-     # - ACCEPT_EULA=Y 
-      #- MSSQL_PID=Developer
-      #- SA_PASSWORD=8jkGh47hnDw89Haq8LN2
-
-  elasticsearch:
-    image: docker.elastic.co/elasticsearch/elasticsearch:6.6.1
-    container_name: elasticsearch
-    healthcheck:
-        test: ["CMD-SHELL", "curl --silent --fail localhost:9200/_cluster/health || exit 1"]
-        interval: 30s
-        timeout: 30s
-        retries: 10
-    ports:
-      - "9200:9200"
+  sqlserver:
+    image: microsoft/mssql-server-linux:latest
+    container_name: sqlserver
     volumes:
-      - elasticsearch-data:/usr/share/elasticsearch/data
-
-  kibana:
-    image: docker.elastic.co/kibana/kibana:6.6.1
-    container_name: kibana
-    healthcheck:
-        test: ["CMD-SHELL", "curl --silent --fail localhost:5601/api/status || exit 1"]
-        interval: 30s
-        timeout: 30s
-        retries: 10
+      - sqlserverdata:/var/opt/mssql 
     ports:
-    - "5601:5601"
-    depends_on:
-    - elasticsearch
+      - "1434:1433"
+    environment:
+      ACCEPT_EULA: "Y" 
+      MSSQL_PID: "Developer"
+      SA_PASSWORD: "Your_password123"
+
+  #elasticsearch:
+   # image: docker.elastic.co/elasticsearch/elasticsearch:6.6.1
+   # container_name: elasticsearch
+    #healthcheck:
+     #   test: ["CMD-SHELL", "curl --silent --fail localhost:9200/_cluster/health || exit 1"]
+      #  interval: 30s
+       # timeout: 30s
+        #retries: 10
+    #ports:
+     # - "9200:9200"
+    #volumes:
+     # - elasticsearch-data:/usr/share/elasticsearch/data
+
+  #kibana:
+   # image: docker.elastic.co/kibana/kibana:6.6.1
+    #container_name: kibana
+    #healthcheck:
+    #    test: ["CMD-SHELL", "curl --silent --fail localhost:5601/api/status || exit 1"]
+     #   interval: 30s
+     #   timeout: 30s
+     #   retries: 10
+    #ports:
+    #- "5601:5601"
+    #depends_on:
+    #- elasticsearch
 
 volumes:
   elasticsearch-data:

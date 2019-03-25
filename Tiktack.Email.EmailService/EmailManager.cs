@@ -1,6 +1,7 @@
-﻿using System;
+﻿using SendGrid.Helpers.Mail;
 using System.Threading.Tasks;
 using Tiktack.Common.Messaging;
+using Tiktack.Email.Core;
 
 namespace Tiktack.Email.EmailService
 {
@@ -24,9 +25,44 @@ namespace Tiktack.Email.EmailService
         }
         public async Task<bool> HandleMessageAsync(string messageType, string message)
         {
-            Console.WriteLine("MESSAGE HANDLED SUCSECC !!!");
-            await Task.Delay(10);
+            switch (messageType)
+            {
+                case "1":
+                    {
+                        await HandleOne(message);
+                        break;
+                    }
+                case "2":
+                    {
+                        await HandleTwo(message);
+                        break;
+                    }
+                default: return false;
+            }
             return true;
+        }
+
+        private async Task HandleOne(string message)
+        {
+            var sendGridMessage = new SendGridMessage
+            {
+                From = new EmailAddress("khantsevitch.oleg@yandex.ru"),
+                PlainTextContent = message,
+                Subject = "Easy"
+            };
+            sendGridMessage.AddTo(new EmailAddress("aleh_khantsevich@epam.com"));
+            await new SendGridSender().SendEmail(sendGridMessage);
+        }
+        private async Task HandleTwo(string message)
+        {
+            var sendGridMessage = new SendGridMessage
+            {
+                From = new EmailAddress("khantsevitch.oleg@yandex.ru"),
+                PlainTextContent = message,
+                Subject = "Easy 2"
+            };
+            sendGridMessage.AddTo(new EmailAddress("aleh_khantsevich@epam.com"));
+            await new SendGridSender().SendEmail(sendGridMessage);
         }
     }
 }

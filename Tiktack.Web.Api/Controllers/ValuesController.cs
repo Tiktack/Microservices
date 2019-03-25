@@ -1,25 +1,30 @@
-﻿using System;
+﻿using Microsoft.AspNet.OData;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Tiktack.Common.Messaging;
+using Tiktack.Web.DataLayer;
 
 namespace Tiktack.Web.Api.Controllers
 {
+    //[Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class ValuesController : ControllerBase
     {
         private readonly IMessagePublisher _messagePublisher;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public ValuesController(IMessagePublisher messagePublisher)
+        public ValuesController(IMessagePublisher messagePublisher, IUnitOfWork unitOfWork)
         {
             _messagePublisher = messagePublisher;
+            _unitOfWork = unitOfWork;
         }
 
         // GET api/values
         [HttpGet]
-        public ActionResult<IEnumerable<string>> Get()
+        [EnableQuery]
+        public async Task<ActionResult<IEnumerable<string>>> Get()
         {
             return new string[] { "value1", "value2" };
         }
@@ -28,7 +33,7 @@ namespace Tiktack.Web.Api.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<string>> Get(int id)
         {
-            await _messagePublisher.PublishMessageAsync("GetMessage", "email message", "");
+            await _messagePublisher.PublishMessageAsync(id.ToString(), id.ToString(), "");
             return "value";
         }
 

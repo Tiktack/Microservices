@@ -9,13 +9,19 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="IdentityServer4.AccessTokenValidation" Version="2.7.0" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.AspNetCore.HealthChecks" Version="1.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.OData" Version="7.1.0" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
-    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.0.2105168" />
+    <PackageReference Include="Microsoft.Extensions.HealthChecks.SqlServer" Version="1.0.0" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Tiktack.Common.Core\Tiktack.Common.Core.csproj" />
     <ProjectReference Include="..\Tiktack.Common.Messaging\Tiktack.Common.Messaging.csproj" />
+    <ProjectReference Include="..\Tiktack.Web.DataLayer\Tiktack.Web.DataLayer.csproj" />
+    <ProjectReference Include="..\Titkack.Web.Businesslayer\Titkack.Web.BusinessLayer.csproj" />
   </ItemGroup>
 
 </Project>
