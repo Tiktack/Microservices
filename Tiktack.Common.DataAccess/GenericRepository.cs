@@ -5,14 +5,14 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
-namespace Tiktack.Web.DataLayer
+namespace Tiktack.Common.DataAccess
 {
     public class GenericRepository<TEntity> : IGenericRepository<TEntity> where TEntity : class
     {
-        private readonly BaseDbContext _context;
+        private readonly DbContext _context;
         private readonly DbSet<TEntity> _dbSet;
 
-        public GenericRepository(BaseDbContext context)
+        public GenericRepository(DbContext context)
         {
             _context = context;
             _dbSet = _context.Set<TEntity>();

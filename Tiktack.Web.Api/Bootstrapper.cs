@@ -1,8 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNet.OData.Extensions;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Serilog;
 using System;
-using Microsoft.AspNet.OData.Extensions;
 using Tiktack.Common.Messaging;
 using Tiktack.Web.DataLayer;
 
@@ -17,10 +18,14 @@ namespace Tiktack.Web.Api
             services.AddDbContext<BaseDbContext>(options => options.UseSqlServer(configuration["ConnectionString"]));
             services.AddTransient<IMessagePublisher>(sp =>
                 new RabbitMQMessagePublisher(host, userName, password,
-                    "Pitstop"));
+                    "Email"));
             services.AddTransient<IUnitOfWork, UnitOfWorkBase>();
             services.AddHealthChecks();
             services.AddOData();
+
+            var logger = new LoggerConfiguration()
+                .ReadFrom.Configuration(configuration)
+                .CreateLogger();
         }
 
         private static Tuple<string, string, string> GetOptionsForRabbitM(IConfiguration configuration)

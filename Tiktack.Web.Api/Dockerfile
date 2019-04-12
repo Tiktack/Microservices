@@ -16,6 +16,5 @@ RUN dotnet publish Tiktack.Web.Api.csproj -c Release -o /app
 
 FROM base AS final
 WORKDIR /app
-HEALTHCHECK --interval=5s --timeout=10s --retries=3 CMD curl --fail http://localhost:80/healthcheck || exit 
 COPY --from=publish /app .
 ENTRYPOINT ["dotnet", "Tiktack.Web.Api.dll"]

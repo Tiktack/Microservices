@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNet.OData;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Tiktack.Common.Messaging;
@@ -14,18 +15,21 @@ namespace Tiktack.Web.Api.Controllers
     {
         private readonly IMessagePublisher _messagePublisher;
         private readonly IUnitOfWork _unitOfWork;
+        private readonly ILogger<ValuesController> _logger;
 
-        public ValuesController(IMessagePublisher messagePublisher, IUnitOfWork unitOfWork)
+        public ValuesController(IMessagePublisher messagePublisher, IUnitOfWork unitOfWork, ILogger<ValuesController> logger)
         {
             _messagePublisher = messagePublisher;
             _unitOfWork = unitOfWork;
+            _logger = logger;
         }
 
         // GET api/values
         [HttpGet]
         [EnableQuery]
-        public async Task<ActionResult<IEnumerable<string>>> Get()
+        public ActionResult<IEnumerable<string>> Get()
         {
+            _logger.LogInformation("SOME INFO");
             return new string[] { "value1", "value2" };
         }
 

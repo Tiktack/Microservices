@@ -29,7 +29,7 @@ namespace Tiktack.Email.EmailService
             var password = rabbitMQConfigSection["Password"];
 
             // start Email manager
-            var messageHandler = new RabbitMQMessageHandler(host, userName, password, "Pitstop", "Auditlog", "");
+            var messageHandler = new RabbitMQMessageHandler(host, userName, password, "Email", "Auditlog", "");
             var manager = new EmailManager(messageHandler);
             manager.Start();
 

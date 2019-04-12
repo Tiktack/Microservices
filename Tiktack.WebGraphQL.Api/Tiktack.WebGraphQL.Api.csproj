@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    <UserSecretsId>cd2a2ed4-4f1e-48d4-bc9d-86bc121b7075</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="GraphiQL" Version="1.2.0" />
+    <PackageReference Include="GraphQL" Version="2.4.0" />
+    <PackageReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Tiktack.WebGraphQL.BusinessLayer\Tiktack.WebGraphQL.BusinessLayer.csproj" />
+    <ProjectReference Include="..\Tiktack.WebGraphQL.DataLayer\Tiktack.WebGraphQL.DataLayer.csproj" />
+  </ItemGroup>
+
+</Project>
