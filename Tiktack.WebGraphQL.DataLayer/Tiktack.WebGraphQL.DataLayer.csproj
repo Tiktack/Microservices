@@ -15,8 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Infrastructure\" />
-    <Folder Include="Types\" />
+    <PackageReference Include="AutoMapper" Version="5.1.1" />
   </ItemGroup>
 
 </Project>

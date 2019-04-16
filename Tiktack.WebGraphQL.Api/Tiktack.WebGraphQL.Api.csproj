@@ -2,17 +2,21 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
+    <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
+    <UserSecretsId>d4ce52ee-967b-402b-8b53-c2a0bd8fa375</UserSecretsId>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
-    <UserSecretsId>cd2a2ed4-4f1e-48d4-bc9d-86bc121b7075</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="GraphiQL" Version="1.2.0" />
     <PackageReference Include="GraphQL" Version="2.4.0" />
+    <PackageReference Include="GraphQL.Server.Transports.AspNetCore" Version="3.4.0" />
+    <PackageReference Include="GraphQL.Server.Transports.WebSockets" Version="3.4.0" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Tiktack.Common.Core\Tiktack.Common.Core.csproj" />
     <ProjectReference Include="..\Tiktack.WebGraphQL.BusinessLayer\Tiktack.WebGraphQL.BusinessLayer.csproj" />
     <ProjectReference Include="..\Tiktack.WebGraphQL.DataLayer\Tiktack.WebGraphQL.DataLayer.csproj" />
   </ItemGroup>
