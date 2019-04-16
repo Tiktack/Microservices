@@ -20,18 +20,19 @@ namespace Tiktack.WebGraphQL.Api.Controllers
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] GraphQLQuery query)
         {
-            if (query == null) { throw new ArgumentNullException(nameof(query)); }
+            if (query == null)
+                throw new ArgumentNullException(nameof(query));
 
             var result = await _documentExecuter.ExecuteAsync(x =>
             {
                 x.Schema = _schema;
                 x.Query = query.Query;
-                x.Inputs = query.Variables;
+                x.Inputs = query.Variables.ToInputs();
             });
+
             if (result.Errors?.Count > 0)
-            {
                 return BadRequest(result.Errors);
-            }
+
             return Ok(result);
         }
     }

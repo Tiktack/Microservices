@@ -9,8 +9,6 @@ namespace Tiktack.WebGraphQL.Api.GraphQL
     {
         public RootMutation(ReservationRepository reservationRepository)
         {
-            Name = "AddReservationMutation";
-
             Field<ReservationType>(
                 "addReservation",
                 arguments: new QueryArguments(
@@ -19,7 +17,7 @@ namespace Tiktack.WebGraphQL.Api.GraphQL
                 resolve: context =>
                 {
                     var reservation = context.GetArgument<Reservation>("reservation");
-                    return reservationRepository.Add(reservation);
+                    return reservationRepository.AddWithGuest(reservation);
                 });
         }
     }

@@ -31,10 +31,19 @@ namespace Tiktack.WebGraphQL.DataLayer.Infrastructure
                 .ToListAsync();
         }
 
-        public async Task Add(Reservation reservation)
+        public async Task<Reservation> Add(Reservation reservation)
         {
-            await _myHotelDbContext.Reservations.AddAsync(reservation);
+            var entity = await _myHotelDbContext.Reservations.AddAsync(reservation);
             await _myHotelDbContext.SaveChangesAsync();
+            return entity.Entity;
+        }
+        public async Task<Reservation> AddWithGuest(Reservation reservation)
+        {
+            var guest = await _myHotelDbContext.Guests.FirstAsync();
+            reservation.Guest = guest;
+            var entity = await _myHotelDbContext.Reservations.AddAsync(reservation);
+            await _myHotelDbContext.SaveChangesAsync();
+            return entity.Entity;
         }
 
         public Reservation Get(int id)
