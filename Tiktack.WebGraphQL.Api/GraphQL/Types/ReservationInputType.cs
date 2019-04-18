@@ -8,7 +8,9 @@ namespace Tiktack.WebGraphQL.Api.GraphQL.Types
         {
             Name = "ReservationInput";
             Field<NonNullGraphType<DateTimeGraphType>>("CheckinDate");
-            Field<DateTimeGraphType>("CheckoutDate");
+            Field<NonNullGraphType<DateTimeGraphType>>("CheckoutDate");
+            Field<NonNullGraphType<IntGraphType>>("GuestId");
+            Field<NonNullGraphType<IntGraphType>>("RoomId");
         }
     }
 }

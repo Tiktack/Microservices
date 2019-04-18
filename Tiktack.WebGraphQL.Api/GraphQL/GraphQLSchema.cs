@@ -1,5 +1,6 @@
 ﻿using GraphQL;
 using GraphQL.Types;
+using Tiktack.WebGraphQL.Api.GraphQL.Methods;
 
 namespace Tiktack.WebGraphQL.Api.GraphQL
 {

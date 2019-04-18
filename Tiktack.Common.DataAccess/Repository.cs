@@ -4,53 +4,57 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace Tiktack.Common.DataAccess
 {
-    public class GenericRepository<TEntity> : IGenericRepository<TEntity> where TEntity : class
+    public class Repository<TDomain> : IRepository<TDomain> where TDomain : class
     {
         private readonly DbContext _context;
-        private readonly DbSet<TEntity> _dbSet;
+        private readonly DbSet<TDomain> _dbSet;
 
-        public GenericRepository(DbContext context)
+        public Repository(DbContext context)
         {
             _context = context;
-            _dbSet = _context.Set<TEntity>();
+            _dbSet = _context.Set<TDomain>();
         }
 
-        public async Task<TEntity> GetById(int id)
+        public async Task<TDomain> GetById(int id)
         {
             return await _dbSet.FindAsync(id);
         }
 
-        public async Task Insert(TEntity entity)
+        public async Task<TDomain> Add(TDomain entity)
         {
-            await _dbSet.AddAsync(entity);
+            var entry = await _dbSet.AddAsync(entity);
             await _context.SaveChangesAsync();
+            return entry.Entity;
         }
 
-        public async Task InsertRange(IEnumerable<TEntity> entities)
+        public async Task AddRange(IEnumerable<TDomain> entities)
         {
             await _dbSet.AddRangeAsync(entities);
             await _context.SaveChangesAsync();
         }
 
-        public async Task Update(TEntity entity)
+        public async Task<TDomain> Update(TDomain entity)
         {
-            _dbSet.Update(entity);
+            var entry = _dbSet.Update(entity);
             await _context.SaveChangesAsync();
+            return entry.Entity;
         }
 
-        public async Task Delete(int id)
+        public async Task<TDomain> Remove(int id)
         {
             var entity = await GetById(id);
-            _dbSet.Remove(entity);
+            var entry = _dbSet.Remove(entity);
             await _context.SaveChangesAsync();
+            return entry.Entity;
         }
 
-        public IQueryable<TEntity> GetAll(
-            Expression<Func<TEntity, bool>> filter = null,
-            Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null,
+        public IQueryable<TDomain> GetAll(
+            Expression<Func<TDomain, bool>> filter = null,
+            Func<IQueryable<TDomain>, IOrderedQueryable<TDomain>> orderBy = null,
             string includeProperties = "")
         {
             var query = _dbSet.AsNoTracking();
@@ -60,7 +64,7 @@ namespace Tiktack.Common.DataAccess
             }
 
             query = includeProperties
-                .Split(new[] {','}, StringSplitOptions.RemoveEmptyEntries)
+                .Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
                 .Aggregate(query, (current, includeProperty) => current.Include(includeProperty));
 
             return orderBy != null ? orderBy(query) : query;
