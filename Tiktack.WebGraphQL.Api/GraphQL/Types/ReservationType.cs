@@ -13,5 +13,7 @@ namespace Tiktack.WebGraphQL.Api.GraphQL.Types
             Field<GuestType>(nameof(Reservation.Guest));
             Field<RoomType>(nameof(Reservation.Room));
         }
+
+
     }
 }

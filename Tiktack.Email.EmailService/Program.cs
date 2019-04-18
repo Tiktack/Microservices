@@ -6,14 +6,14 @@ using Tiktack.Common.Messaging;
 
 namespace Tiktack.Email.EmailService
 {
-    class Program
+    internal class Program
     {
-        private static readonly string _env;
-        public static IConfigurationRoot Config { get; private set; }
+        private static readonly string Env;
+        private static IConfigurationRoot Config { get; set; }
 
         static Program()
         {
-            _env = Environment.GetEnvironmentVariable("PITSTOP_ENVIRONMENT");
+            Env = Environment.GetEnvironmentVariable("PITSTOP_ENVIRONMENT");
             Config = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())
                 .AddJsonFile("appsettings.json")
@@ -33,7 +33,7 @@ namespace Tiktack.Email.EmailService
             var manager = new EmailManager(messageHandler);
             manager.Start();
 
-            if (_env == "Development")
+            if (Env == "Development")
             {
                 Console.WriteLine("Email service started. Press any key to stop...");
                 Console.ReadKey(true);

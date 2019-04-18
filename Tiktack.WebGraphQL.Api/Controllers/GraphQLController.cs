@@ -28,7 +28,7 @@ namespace Tiktack.WebGraphQL.Api.Controllers
                 x.Schema = _schema;
                 x.Query = query.Query;
                 x.Inputs = query.Variables.ToInputs();
-            });
+            }).ConfigureAwait(false);
 
             if (result.Errors?.Count > 0)
                 return BadRequest(result.Errors);

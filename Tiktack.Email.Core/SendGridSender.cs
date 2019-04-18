@@ -6,7 +6,7 @@ namespace Tiktack.Email.Core
 {
     public class SendGridSender
     {
-        private SendGridClient _client;
+        private readonly SendGridClient _client;
 
         public SendGridSender() => _client = new SendGridClient("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");
         public SendGridSender(string apiKey) => _client = new SendGridClient(apiKey);

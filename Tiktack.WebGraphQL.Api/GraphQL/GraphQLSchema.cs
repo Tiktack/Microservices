@@ -9,6 +9,7 @@ namespace Tiktack.WebGraphQL.Api.GraphQL
         {
             Query = dependencyResolver.Resolve<RootQuery>();
             Mutation = dependencyResolver.Resolve<RootMutation>();
+            Subscription = dependencyResolver.Resolve<RootSubscription>();
         }
     }
 }

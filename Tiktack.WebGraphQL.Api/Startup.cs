@@ -1,11 +1,13 @@
-﻿using GraphiQl;
-using GraphQL.Server;
+﻿using GraphQL.Server;
+using GraphQL.Server.Ui.GraphiQL;
+using GraphQL.Server.Ui.Playground;
+using GraphQL.Server.Ui.Voyager;
+using GraphQL.Types;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Tiktack.WebGraphQL.Api.GraphQL;
 using Tiktack.WebGraphQL.DataLayer.Helpers;
 using Tiktack.WebGraphQL.DataLayer.Infrastructure;
 
@@ -31,16 +33,23 @@ namespace Tiktack.WebGraphQL.Api
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, GraphQLDbContext db)
         {
             if (env.IsDevelopment())
-            {
                 app.UseDeveloperExceptionPage();
-            }
+
 
             app.UseWebSockets();
-            app.UseGraphQLWebSockets<GraphQLSchema>();
+            app.UseGraphQLWebSockets<ISchema>();
+            app.UseGraphQL<ISchema>();
+
+            // use graphiQL middleware at default url /graphiql
+            app.UseGraphiQLServer(new GraphiQLOptions());
+            // use graphql-playground middleware at default url /ui/playground
+            app.UseGraphQLPlayground(new GraphQLPlaygroundOptions());
+            // use voyager middleware at default url /ui/voyager
+            app.UseGraphQLVoyager(new GraphQLVoyagerOptions());
+
+            app.UseMvcWithDefaultRoute();
+
             db.GraphQLEnsureSeedData();
-            app.UseGraphiQl();
-            app.UseHttpsRedirection();
-            app.UseMvc();
         }
     }
 }

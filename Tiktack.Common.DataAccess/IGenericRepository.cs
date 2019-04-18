@@ -15,7 +15,7 @@ namespace Tiktack.Common.DataAccess
         Task<TEntity> GetById(int id);
 
         Task Insert(TEntity entity);
-
+        
         Task InsertRange(IEnumerable<TEntity> entities);
 
         Task Update(TEntity entity);
