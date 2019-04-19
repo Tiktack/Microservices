@@ -8,6 +8,8 @@ namespace Tiktack.WebGraphQL.Api.GraphQL.Methods
     {
         public RootQuery(UnitOfWork unitOfWork)
         {
+            Name = "Query";
+
             Field<ListGraphType<ReservationType>>(
                 "reservations",
                 resolve: context => unitOfWork.ReservationRepository.GetAll(includeProperties:

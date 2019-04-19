@@ -5,11 +5,11 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reactive.Subjects;
-using Tiktack.Common.DataAccess;
 using Tiktack.Common.DataAccess.Repositories;
 using Tiktack.Common.DataAccess.Repositories.Interfaces;
 using Tiktack.WebGraphQL.Api.GraphQL;
 using Tiktack.WebGraphQL.Api.GraphQL.Methods;
+using Tiktack.WebGraphQL.BusinessLayer.Providers;
 using Tiktack.WebGraphQL.DataLayer.Entities;
 using Tiktack.WebGraphQL.DataLayer.Infrastructure;
 
@@ -27,6 +27,8 @@ namespace Tiktack.WebGraphQL.Api
                 .AddWebSockets()
                 .AddDataLoader();
 
+            services.AddTransient<IRoomProvider, RoomProvider>();
+            services.AddTransient<IGuestProvider, GuestProvider>();
             services.AddSingleton<IDocumentExecuter, DocumentExecuter>();
             services.AddSingleton<RootQuery>();
             services.AddSingleton<RootMutation>();
