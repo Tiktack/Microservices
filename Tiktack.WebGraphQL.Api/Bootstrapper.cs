@@ -20,8 +20,6 @@ namespace Tiktack.WebGraphQL.Api
         public override void Configure(IServiceCollection services, IConfiguration configuration)
         {
             services.AddDbContext<DbContext, GraphQLDbContext>(options => options.UseSqlServer(configuration["ConnectionString"]));
-            services.AddDbContext<GraphQLDbContext>(options => options.UseSqlServer(configuration["ConnectionString"]));
-
             services.AddGraphQL(x => x.ExposeExceptions = true)
                 .AddGraphTypes(ServiceLifetime.Scoped)
                 .AddWebSockets()

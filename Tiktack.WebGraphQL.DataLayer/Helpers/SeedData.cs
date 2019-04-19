@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore.Internal;
 using System;
+using Microsoft.EntityFrameworkCore;
 using Tiktack.WebGraphQL.DataLayer.Entities;
 using Tiktack.WebGraphQL.DataLayer.Infrastructure;
 
@@ -7,8 +8,9 @@ namespace Tiktack.WebGraphQL.DataLayer.Helpers
 {
     public static class SeedData
     {
-        public static void GraphQLEnsureSeedData(this GraphQLDbContext dbContext)
+        public static void GraphQLEnsureSeedData(this DbContext _dbContext)
         {
+            var dbContext = (GraphQLDbContext)_dbContext;
 
             if (!dbContext.Rooms.Any())
             {
