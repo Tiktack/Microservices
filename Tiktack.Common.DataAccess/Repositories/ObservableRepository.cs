@@ -1,13 +1,15 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reactive.Linq;
 using System.Reactive.Subjects;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+using Tiktack.Common.DataAccess.Helpers;
+using Tiktack.Common.DataAccess.Repositories.Interfaces;
 
-namespace Tiktack.Common.DataAccess
+namespace Tiktack.Common.DataAccess.Repositories
 {
     public class ObservableRepository<TDomain, TEvent> : IObservableRepository<TDomain, TEvent>
         where TDomain : class
@@ -69,7 +71,7 @@ namespace Tiktack.Common.DataAccess
         public IQueryable<TDomain> GetAll(
             Expression<Func<TDomain, bool>> filter = null,
             Func<IQueryable<TDomain>, IOrderedQueryable<TDomain>> orderBy = null,
-            string includeProperties = "")
+            string includeProperties = null)
         {
             var query = _dbSet.AsNoTracking();
             if (filter != null)
@@ -77,9 +79,15 @@ namespace Tiktack.Common.DataAccess
                 query = query.Where(filter);
             }
 
-            query = includeProperties
-                .Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
-                .Aggregate(query, (current, includeProperty) => current.Include(includeProperty));
+            if (includeProperties != null)
+            {
+                var navigationProps = typeof(TDomain).GetNavigationProps();
+                query = includeProperties
+                    .Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
+                    .Select(x => char.ToUpper(x[0]) + x.Substring(1))
+                    .Intersect(navigationProps)
+                    .Aggregate(query, (current, includeProperty) => current.Include(includeProperty));
+            }
 
             return orderBy != null ? orderBy(query) : query;
         }

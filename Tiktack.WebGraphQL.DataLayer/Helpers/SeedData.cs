@@ -9,25 +9,71 @@ namespace Tiktack.WebGraphQL.DataLayer.Helpers
     {
         public static void GraphQLEnsureSeedData(this GraphQLDbContext dbContext)
         {
+
+            if (!dbContext.Rooms.Any())
+            {
+                dbContext.Rooms.Add(new Room
+                {
+                    Name = "Room 601",
+                    AllowedSmoking = false,
+                    Number = 601,
+                    Status = RoomStatus.Available
+                });
+                dbContext.Rooms.Add(new Room
+                {
+                    Name = "Room 605",
+                    AllowedSmoking = true,
+                    Number = 605,
+                    Status = RoomStatus.Unavailable
+                });
+                dbContext.SaveChanges();
+            }
+
+            if (!dbContext.Guests.Any())
+            {
+                dbContext.Guests.Add(new Guest
+                {
+                    Name = "Artur",
+                    RegisterDate = DateTime.Now
+                });
+                dbContext.Guests.Add(new Guest
+                {
+                    Name = "Aleh",
+                    RegisterDate = DateTime.Now
+                });
+                dbContext.Guests.Add(new Guest
+                {
+                    Name = "Siarhey",
+                    RegisterDate = DateTime.Now
+                });
+                dbContext.SaveChanges();
+            }
+
             if (!dbContext.Reservations.Any())
             {
                 dbContext.Reservations.Add(new Reservation
                 {
-                    Room = new Room
-                    {
-                        Name = "customV1-room",
-                        AllowedSmoking = true,
-                        Status = RoomStatus.Unavailable,
-                        Number = 106
-                    },
-                    Guest = new Guest
-                    {
-                        Name = "Siarhei Mokin",
-                        RegisterDate = DateTime.Now.AddDays(-1),
-                    },
+                    GuestId = 2,
+                    RoomId = 2,
                     CheckinDate = DateTime.Now.AddDays(-2),
                     CheckoutDate = DateTime.Now.AddDays(3)
                 });
+                dbContext.SaveChanges();
+                dbContext.Reservations.Add(new Reservation
+                {
+                    GuestId = 3,
+                    RoomId = 3,
+                    CheckinDate = DateTime.Now.AddDays(-5),
+                    CheckoutDate = DateTime.Now.AddDays(10)
+                });
+                dbContext.Reservations.Add(new Reservation
+                {
+                    GuestId = 4,
+                    RoomId = 2,
+                    CheckinDate = DateTime.Now.AddDays(-5),
+                    CheckoutDate = DateTime.Now.AddDays(10)
+                });
+
                 dbContext.SaveChanges();
             }
         }

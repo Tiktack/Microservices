@@ -8,10 +8,12 @@ namespace Tiktack.WebGraphQL.Api.GraphQL.Methods
     {
         public RootQuery(UnitOfWork unitOfWork)
         {
-
             Field<ListGraphType<ReservationType>>(
                 "reservations",
-                resolve: context => unitOfWork.ReservationRepository.GetAll());
+                resolve: context => unitOfWork.ReservationRepository.GetAll(includeProperties:
+                    string.Join(',',
+                        context.SubFields.Keys
+                    )));
 
             Field<ReservationType>(
                 "reservation",
@@ -21,6 +23,20 @@ namespace Tiktack.WebGraphQL.Api.GraphQL.Methods
                 }),
                 resolve: context => unitOfWork.ReservationRepository
                     .GetById(context.GetArgument<int>("id")));
+
+            Field<ListGraphType<GuestType>>(
+                "guests",
+                resolve: context => unitOfWork.GuestRepository.GetAll(includeProperties:
+                    string.Join(',',
+                        context.SubFields.Keys
+                    )));
+
+            Field<ListGraphType<RoomType>>(
+                "rooms",
+                resolve: context => unitOfWork.RoomRepository.GetAll(includeProperties:
+                    string.Join(',',
+                        context.SubFields.Keys
+                    )));
         }
     }
 }

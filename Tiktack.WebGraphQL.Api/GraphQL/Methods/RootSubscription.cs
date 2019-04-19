@@ -2,6 +2,7 @@
 using GraphQL.Resolvers;
 using GraphQL.Types;
 using Tiktack.Common.DataAccess;
+using Tiktack.Common.DataAccess.Repositories;
 using Tiktack.WebGraphQL.Api.GraphQL.Types;
 using Tiktack.WebGraphQL.DataLayer.Entities;
 using Tiktack.WebGraphQL.DataLayer.Infrastructure;
@@ -19,8 +20,8 @@ namespace Tiktack.WebGraphQL.Api.GraphQL.Methods
             {
                 Name = "reservationCreated",
                 Type = typeof(ReservationType),
-                Resolver = new FuncFieldResolver<Reservation>(context => (Reservation)((ReservationWithEvent)context.Source).Entity),
-                Subscriber = new EventStreamResolver<ReservationWithEvent>(context => unitOfWork.ReservationRepository
+                Resolver = new FuncFieldResolver<Reservation>(context => (Reservation)((EntityWithEvent)context.Source).Entity),
+                Subscriber = new EventStreamResolver<EntityWithEvent>(context => unitOfWork.ReservationRepository
                     .ObservableSubject()
                     .Where(x => x.EventType == RepositoryEventType.AddEvent)
                 )
@@ -30,8 +31,8 @@ namespace Tiktack.WebGraphQL.Api.GraphQL.Methods
             {
                 Name = "reservationUpdated",
                 Type = typeof(ReservationType),
-                Resolver = new FuncFieldResolver<Reservation>(context => (Reservation)((ReservationWithEvent)context.Source).Entity),
-                Subscriber = new EventStreamResolver<ReservationWithEvent>(context => unitOfWork.ReservationRepository
+                Resolver = new FuncFieldResolver<Reservation>(context => (Reservation)((EntityWithEvent)context.Source).Entity),
+                Subscriber = new EventStreamResolver<EntityWithEvent>(context => unitOfWork.ReservationRepository
                     .ObservableSubject()
                     .Where(x => x.EventType == RepositoryEventType.UpdateEvent)
                 )
@@ -41,8 +42,8 @@ namespace Tiktack.WebGraphQL.Api.GraphQL.Methods
             {
                 Name = "reservationRemoved",
                 Type = typeof(ReservationType),
-                Resolver = new FuncFieldResolver<Reservation>(context => (Reservation)((ReservationWithEvent)context.Source).Entity),
-                Subscriber = new EventStreamResolver<ReservationWithEvent>(context => unitOfWork.ReservationRepository
+                Resolver = new FuncFieldResolver<Reservation>(context => (Reservation)((EntityWithEvent)context.Source).Entity),
+                Subscriber = new EventStreamResolver<EntityWithEvent>(context => unitOfWork.ReservationRepository
                     .ObservableSubject()
                     .Where(x => x.EventType == RepositoryEventType.RemoveEvent)
                 )

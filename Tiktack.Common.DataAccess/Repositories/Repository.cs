@@ -1,12 +1,12 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore.ChangeTracking;
+using Microsoft.EntityFrameworkCore;
+using Tiktack.Common.DataAccess.Repositories.Interfaces;
 
-namespace Tiktack.Common.DataAccess
+namespace Tiktack.Common.DataAccess.Repositories
 {
     public class Repository<TDomain> : IRepository<TDomain> where TDomain : class
     {

@@ -1,4 +1,4 @@
-﻿namespace Tiktack.Common.DataAccess
+﻿namespace Tiktack.Common.DataAccess.Repositories.Interfaces
 {
     public interface IRepositoryEvent
     {
