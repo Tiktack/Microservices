@@ -1,0 +1,43 @@
+syntax = "proto3";
+
+package Greet;
+
+// The greeting service definition.
+service Greeter {
+
+	rpc SayBye (ByeRequest) returns (ByeReply) {}
+
+	rpc BeStreaming (stream StreamRequest) returns (stream StreamResponse) {}
+
+	rpc ServerStreaming(HelloRequest) returns (stream StreamResponse) {}
+	
+	rpc ClientStreaming(stream StreamRequest) returns (HelloReply) {}
+}
+
+// The request message containing the user's name.
+message HelloRequest {
+	string name = 1;
+}
+
+// The response message containing the greetings.
+message HelloReply {
+	string message = 1;
+}
+
+message ByeRequest {
+	string NAME = 1;
+	int32 reps = 2;
+}
+
+message ByeReply {
+	string message = 1;
+}
+
+
+message StreamResponse {
+	string message = 1;
+}
+message StreamRequest {
+	string message = 1;
+	int32 count = 2;
+}

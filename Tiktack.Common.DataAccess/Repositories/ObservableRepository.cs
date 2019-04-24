@@ -19,6 +19,8 @@ namespace Tiktack.Common.DataAccess.Repositories
         private readonly DbSet<TDomain> _dbSet;
         private readonly ISubject<TEvent> _observable;
 
+        public IObservable<TEvent> ObservableSubject() => _observable.AsObservable();
+
         public ObservableRepository(DbContext context, ISubject<TEvent> observable)
         {
             _context = context;
@@ -102,6 +104,6 @@ namespace Tiktack.Common.DataAccess.Repositories
             _observable.OnNext(tEvent);
         }
 
-        public IObservable<TEvent> ObservableSubject() => _observable.AsObservable();
+        
     }
 }

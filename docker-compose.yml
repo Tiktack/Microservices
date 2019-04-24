@@ -2,10 +2,8 @@ version: '3.7'
 
 services:
   tiktack.webgraphql.api:
-    image: tiktack.webgraphql.api
     build:
-      context: .
-      dockerfile: Tiktack.WebGraphQL.Api/Dockerfile
+      context: ./Tiktack.WebGraphQL.Api
     container_name: tiktack.webgraphql.api
     depends_on:
       - sqlserver
@@ -23,8 +21,7 @@ services:
   tiktack.web.api:
     image: tiktack.web.api
     build:
-      context: .
-      dockerfile: Tiktack.Web.Api/Dockerfile
+      context: ./Tiktack.Web.Api
     container_name: tiktack.web.api
     healthcheck:
       timeout: 5s
@@ -48,14 +45,21 @@ services:
   tiktack.email.emailservice:
     image: tiktack.email.emailservice
     build:
-      context: .
-      dockerfile: Tiktack.Email.EmailService/Dockerfile
+      context: ./Tiktack.Email.EmailService
     container_name: tiktack.email.emailservice
     depends_on:
       - rabbitmq
       - redis
     environment:
       - PITSTOP_ENVIRONMENT=Production
+
+  tiktack.grpc.server:
+    image: tiktack.grpc.server
+    build:
+      context: ./Tiktack.gRPC.Server
+    container_name: tiktack.grpc.server
+    ports:
+    - "9988:9988"
 
   redis:
     image: redis
