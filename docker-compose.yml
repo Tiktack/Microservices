@@ -3,8 +3,9 @@ version: '3.7'
 services:
   tiktack.webgraphql.api:
     image: tiktack.webgraphql.api
-    build:
-      context: ./Tiktack.WebGraphQL.Api
+    build: 
+      context: .
+      dockerfile: ./Tiktack.WebGraphQL.Api/Dockerfile
     container_name: tiktack.webgraphql.api
     healthcheck:
       timeout: 5s
@@ -27,7 +28,8 @@ services:
   tiktack.web.api:
     image: tiktack.web.api
     build:
-      context: ./Tiktack.Web.Api
+      context: .
+      dockerfile: ./Tiktack.Web.Api/Dockerfile
     container_name: tiktack.web.api
     healthcheck:
       timeout: 5s
@@ -51,7 +53,8 @@ services:
   tiktack.email.emailservice:
     image: tiktack.email.emailservice
     build:
-      context: ./Tiktack.Email.EmailService
+      context: .
+      dockerfile: ./Tiktack.Email.EmailService/Dockerfile
     container_name: tiktack.email.emailservice
     depends_on:
       - rabbitmq
