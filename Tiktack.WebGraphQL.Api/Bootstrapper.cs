@@ -25,6 +25,8 @@ namespace Tiktack.WebGraphQL.Api
                 .AddWebSockets()
                 .AddDataLoader();
 
+            services.AddHealthChecks();
+
             services.AddTransient<IRoomProvider, RoomProvider>();
             services.AddTransient<IGuestProvider, GuestProvider>();
             services.AddSingleton<IDocumentExecuter, DocumentExecuter>();

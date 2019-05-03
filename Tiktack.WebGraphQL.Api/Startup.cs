@@ -43,10 +43,11 @@ namespace Tiktack.WebGraphQL.Api
             if (env.IsDevelopment())
                 app.UseDeveloperExceptionPage();
 
-
             app.UseWebSockets();
             app.UseGraphQLWebSockets<ISchema>();
             app.UseGraphQL<ISchema>();
+
+            app.UseHealthChecks("/health");
 
             // use graphiQL middleware at default url /graphiql
             app.UseGraphiQLServer(new GraphiQLOptions());
