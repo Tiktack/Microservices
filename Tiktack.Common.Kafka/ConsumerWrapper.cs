@@ -16,7 +16,7 @@ namespace Tiktack.Common.Kafka
             var consumerConfig = new ConsumerConfig
             {
                 GroupId = "test-group",
-                BootstrapServers = "kafka:9092",
+                BootstrapServers = "kafka:9093",
                 // Note: The AutoOffsetReset property determines the start offset in the event
                 // there are not yet any committed offsets for the consumer group for the
                 // topic/partitions of interest. By default, offsets are committed

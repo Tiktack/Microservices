@@ -19,7 +19,7 @@ namespace Tiktack.Common.Kafka
         {
             _producer = new ProducerBuilder<Null, string>(new ProducerConfig
             {
-                BootstrapServers = "kafka:9092"
+                BootstrapServers = "kafka:9093"
             }).Build();
         }
 
@@ -37,9 +37,9 @@ namespace Tiktack.Common.Kafka
         {
             try
             {
-                await _producer.ProduceAsync("NewTest", new Message<Null, string>
+                await _producer.ProduceAsync("Email", new Message<Null, string>
                 {
-                    Value = "test string"
+                    Value = message
                 });
             }
             catch (ProduceException<Null, string> e)
