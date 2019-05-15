@@ -13,7 +13,6 @@
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.HealthChecks" Version="1.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.OData" Version="7.1.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
     <PackageReference Include="Serilog" Version="2.8.0" />
     <PackageReference Include="Serilog.Extensions.Logging" Version="2.0.4" />
     <PackageReference Include="Serilog.Settings.Configuration" Version="3.0.1" />
@@ -22,6 +21,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Tiktack.Common.Core\Tiktack.Common.Core.csproj" />
+    <ProjectReference Include="..\Tiktack.Common.Kafka\Tiktack.Common.Kafka.csproj" />
     <ProjectReference Include="..\Tiktack.Common.Messaging\Tiktack.Common.Messaging.csproj" />
     <ProjectReference Include="..\Tiktack.Web.DataLayer\Tiktack.Web.DataLayer.csproj" />
     <ProjectReference Include="..\Titkack.Web.Businesslayer\Titkack.Web.BusinessLayer.csproj" />

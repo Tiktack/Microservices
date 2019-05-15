@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Serilog;
 using System;
+using Tiktack.Common.Kafka;
 using Tiktack.Common.Messaging;
 using Tiktack.Web.DataLayer;
 
@@ -14,6 +15,8 @@ namespace Tiktack.Web.Api
         public override void Configure(IServiceCollection services, IConfiguration configuration)
         {
             var (host, userName, password) = GetOptionsForRabbitM(configuration);
+
+            services.AddTransient<IKafkaProducer, ProducerWrapper>();
 
             services.AddDbContext<BaseDbContext>(options => options.UseSqlServer(configuration["ConnectionString"]));
             services.AddTransient<IMessagePublisher>(sp =>
