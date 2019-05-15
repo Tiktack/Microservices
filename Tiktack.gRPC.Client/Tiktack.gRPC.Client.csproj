@@ -6,16 +6,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Protobuf Include="..\*.proto" 
-              GrpcServices="Client" 
-              OutputDir="%(RelativePath)Generated" 
-              CompileOutputs="false" />
+    <Protobuf Include="..\*.proto" GrpcServices="Client" OutputDir="%(RelativePath)Generated" CompileOutputs="false" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Grpc.Core" Version="1.20.0" />
+    <PackageReference Include="Grpc.Core" Version="1.20.1" />
     <PackageReference Include="Google.Protobuf" Version="3.7.0" />
-    <PackageReference Include="Grpc.Tools" Version="1.20.0" PrivateAssets="All" />
+    <PackageReference Include="Grpc.Tools" Version="1.20.1" PrivateAssets="All" />
   </ItemGroup>
 
 </Project>

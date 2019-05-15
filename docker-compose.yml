@@ -158,10 +158,17 @@ services:
     ports:
       - "9092:9092"
     environment:
-      KAFKA_ADVERTISED_HOST_NAME: 0.0.0.0
+      KAFKA_ADVERTISED_HOST_NAME: kafka
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
+
+  tiktack.email.emailservicekafka:
+    image: tiktack.email.emailservicekafka
+    build:
+      context: .
+      dockerfile: Tiktack.Email.EmailServiceKafka/Dockerfile
+    container_name: tiktack.email.emailservicekafka
 
 volumes:
   elasticsearch-data:
