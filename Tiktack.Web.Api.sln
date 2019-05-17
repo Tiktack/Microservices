@@ -14,7 +14,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Email", "Email", "{CE09A15A
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tiktack.Web.DataLayer", "Tiktack.Web.DataLayer\Tiktack.Web.DataLayer.csproj", "{E3973F12-B6E9-4886-88CD-0C0FF168564A}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Titkack.Web.BusinessLayer", "Titkack.Web.Businesslayer\Titkack.Web.BusinessLayer.csproj", "{3D52A72E-1D1C-448E-BD3A-2726E788A11B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Titkack.Web.BusinessLayer", "Titkack.Web.BusinessLayer\Titkack.Web.BusinessLayer.csproj", "{3D52A72E-1D1C-448E-BD3A-2726E788A11B}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{24D48FFD-9FD3-4CCA-92CA-CBE15B2016B3}"
 EndProject
