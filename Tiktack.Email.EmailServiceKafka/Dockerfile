@@ -1,7 +1,7 @@
-FROM mcr.microsoft.com/dotnet/core/runtime:3.0-stretch-slim AS base
+FROM mcr.microsoft.com/dotnet/core/runtime:3.0-buster-slim AS base
 WORKDIR /app
 
-FROM mcr.microsoft.com/dotnet/core/sdk:3.0-stretch AS build
+FROM mcr.microsoft.com/dotnet/core/sdk:3.0-buster AS build
 WORKDIR /src
 COPY ["Tiktack.Email.EmailServiceKafka/Tiktack.Email.EmailServiceKafka.csproj", "Tiktack.Email.EmailServiceKafka/"]
 COPY ["Tiktack.Email.Core/Tiktack.Email.Core.csproj", "Tiktack.Email.Core/"]

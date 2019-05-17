@@ -5,12 +5,11 @@ using GraphQL.Server.Ui.Voyager;
 using GraphQL.Types;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Tiktack.WebGraphQL.DataLayer.Helpers;
-using Tiktack.WebGraphQL.DataLayer.Infrastructure;
 
 namespace Tiktack.WebGraphQL.Api
 {
@@ -26,12 +25,12 @@ namespace Tiktack.WebGraphQL.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddControllers();
             new Bootstrapper().Configure(services, Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, DbContext db)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, DbContext db)
         {
 
             using (var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
@@ -46,8 +45,12 @@ namespace Tiktack.WebGraphQL.Api
             app.UseWebSockets();
             app.UseGraphQLWebSockets<ISchema>();
             app.UseGraphQL<ISchema>();
-
-            app.UseHealthChecks("/health");
+            app.UseRouting();
+            app.UseEndpoints(endpoint =>
+            {
+                endpoint.MapDefaultControllerRoute();
+                endpoint.MapHealthChecks("/health");
+            });
 
             // use graphiQL middleware at default url /graphiql
             app.UseGraphiQLServer(new GraphiQLOptions());
@@ -55,8 +58,6 @@ namespace Tiktack.WebGraphQL.Api
             app.UseGraphQLPlayground(new GraphQLPlaygroundOptions());
             // use voyager middleware at default url /ui/voyager
             app.UseGraphQLVoyager(new GraphQLVoyagerOptions());
-
-            app.UseMvcWithDefaultRoute();
 
             db.GraphQLEnsureSeedData();
         }

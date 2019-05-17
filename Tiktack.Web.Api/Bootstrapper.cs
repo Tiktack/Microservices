@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNet.OData.Extensions;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Serilog;
@@ -24,7 +23,6 @@ namespace Tiktack.Web.Api
                     "Email"));
             services.AddTransient<IUnitOfWork, UnitOfWorkBase>();
             services.AddHealthChecks();
-            services.AddOData();
 
             var logger = new LoggerConfiguration()
                 .ReadFrom.Configuration(configuration)
