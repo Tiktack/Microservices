@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System;
-using Tiktack.Common.DataAccess;
 using Tiktack.Common.DataAccess.Repositories.Interfaces;
 using Tiktack.WebGraphQL.DataLayer.Entities;
 

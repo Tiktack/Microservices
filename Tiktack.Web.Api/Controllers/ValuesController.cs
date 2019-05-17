@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNet.OData;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -26,7 +25,6 @@ namespace Tiktack.Web.Api.Controllers
 
         // GET api/values
         [HttpGet]
-        [EnableQuery]
         public ActionResult<IEnumerable<string>> Get()
         {
             _logger.LogInformation("SOME INFO");

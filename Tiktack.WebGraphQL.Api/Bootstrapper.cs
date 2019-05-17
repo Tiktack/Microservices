@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reactive.Subjects;
+using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Tiktack.Common.DataAccess.Repositories;
 using Tiktack.Common.DataAccess.Repositories.Interfaces;
 using Tiktack.WebGraphQL.Api.GraphQL;
@@ -19,11 +20,17 @@ namespace Tiktack.WebGraphQL.Api
     {
         public override void Configure(IServiceCollection services, IConfiguration configuration)
         {
-            services.AddDbContext<DbContext, GraphQLDbContext>(options => options.UseSqlServer(configuration["ConnectionString"]));
+            services.AddDbContext<DbContext, GraphQLDbContext>(options => options.UseSqlServer(configuration["ConnectionString"]),ServiceLifetime.Singleton);
             services.AddGraphQL(x => x.ExposeExceptions = true)
                 .AddGraphTypes(ServiceLifetime.Scoped)
                 .AddWebSockets()
                 .AddDataLoader();
+
+            //temporary cuz breakingchanges
+            services.Configure<KestrelServerOptions>(options =>
+            {
+                options.AllowSynchronousIO = true;
+            });
 
             services.AddHealthChecks();
 
