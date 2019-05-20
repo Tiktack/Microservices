@@ -2,8 +2,7 @@
 
 ## Getting Started
 Use "docker-compose up -d"
-
-##WebApi 
+## WebApi 
   Serilog
   Elasticsearch
   Kibana
