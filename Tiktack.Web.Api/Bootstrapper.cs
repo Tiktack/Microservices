@@ -6,6 +6,7 @@ using System;
 using Tiktack.Common.Kafka;
 using Tiktack.Common.Messaging;
 using Tiktack.Web.DataLayer;
+using Titkack.Web.BusinessLayer;
 
 namespace Tiktack.Web.Api
 {
@@ -22,6 +23,8 @@ namespace Tiktack.Web.Api
                 new RabbitMQMessagePublisher(host, userName, password,
                     "Email"));
             services.AddTransient<IUnitOfWork, UnitOfWorkBase>();
+            services.AddTransient<IMachineLearningProvider, MachineLearningProvider>();
+
             services.AddHealthChecks();
 
             var logger = new LoggerConfiguration()

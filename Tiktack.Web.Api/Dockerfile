@@ -15,9 +15,11 @@ RUN dotnet restore "Tiktack.Web.Api/Tiktack.Web.Api.csproj"
 COPY . .
 WORKDIR "/src/Tiktack.Web.Api"
 RUN dotnet build "Tiktack.Web.Api.csproj" -c Release -o /app
+COPY ./Tiktack.Web.ApiML.Model/MLModel.zip .
 
 FROM build AS publish
 RUN dotnet publish "Tiktack.Web.Api.csproj" -c Release -o /app
+COPY ./Tiktack.Web.ApiML.Model/MLModel.zip .
 
 FROM base AS final
 WORKDIR /app

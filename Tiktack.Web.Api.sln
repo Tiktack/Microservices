@@ -49,9 +49,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tiktack.gRPC.Protos", "Tikt
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tiktack.gRPC.Client", "Tiktack.gRPC.Client\Tiktack.gRPC.Client.csproj", "{36BB4DF2-F305-442A-946B-279ED1A93E7D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tiktack.Email.EmailServiceKafka", "Tiktack.Email.EmailServiceKafka\Tiktack.Email.EmailServiceKafka.csproj", "{8C0FEB40-E10B-4FA3-B380-699CF625B3EB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tiktack.Email.EmailServiceKafka", "Tiktack.Email.EmailServiceKafka\Tiktack.Email.EmailServiceKafka.csproj", "{8C0FEB40-E10B-4FA3-B380-699CF625B3EB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tiktack.Common.Kafka", "Tiktack.Common.Kafka\Tiktack.Common.Kafka.csproj", "{04338A08-FB31-4CF6-8F13-CBD3CCA6584A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tiktack.Common.Kafka", "Tiktack.Common.Kafka\Tiktack.Common.Kafka.csproj", "{04338A08-FB31-4CF6-8F13-CBD3CCA6584A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tiktack.Web.ApiML.Model", "Tiktack.Web.ApiML.Model\Tiktack.Web.ApiML.Model.csproj", "{6467915D-A6FF-4EF3-BC61-20732FCD2409}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tiktack.Web.ApiML.ConsoleApp", "Tiktack.Web.ApiML.ConsoleApp\Tiktack.Web.ApiML.ConsoleApp.csproj", "{4BD1ABAA-9F57-468B-8895-0C5BB7C5EDE8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -123,6 +127,14 @@ Global
 		{04338A08-FB31-4CF6-8F13-CBD3CCA6584A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{04338A08-FB31-4CF6-8F13-CBD3CCA6584A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{04338A08-FB31-4CF6-8F13-CBD3CCA6584A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6467915D-A6FF-4EF3-BC61-20732FCD2409}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6467915D-A6FF-4EF3-BC61-20732FCD2409}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6467915D-A6FF-4EF3-BC61-20732FCD2409}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6467915D-A6FF-4EF3-BC61-20732FCD2409}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4BD1ABAA-9F57-468B-8895-0C5BB7C5EDE8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4BD1ABAA-9F57-468B-8895-0C5BB7C5EDE8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4BD1ABAA-9F57-468B-8895-0C5BB7C5EDE8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4BD1ABAA-9F57-468B-8895-0C5BB7C5EDE8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -144,6 +156,8 @@ Global
 		{36BB4DF2-F305-442A-946B-279ED1A93E7D} = {4277D679-B4DE-4EC9-888E-96D5EE8D41A6}
 		{8C0FEB40-E10B-4FA3-B380-699CF625B3EB} = {CE09A15A-01F9-4778-A7C5-8C5ADBCF4FE9}
 		{04338A08-FB31-4CF6-8F13-CBD3CCA6584A} = {24D48FFD-9FD3-4CCA-92CA-CBE15B2016B3}
+		{6467915D-A6FF-4EF3-BC61-20732FCD2409} = {05C7E9FF-ABDC-4080-867C-F970A6DB9753}
+		{4BD1ABAA-9F57-468B-8895-0C5BB7C5EDE8} = {05C7E9FF-ABDC-4080-867C-F970A6DB9753}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {92B9B252-345A-4954-9683-6BD41C11EA47}
