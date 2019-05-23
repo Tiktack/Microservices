@@ -1,6 +1,4 @@
-﻿using System.IO;
-using System.Security.Cryptography;
-using Microsoft.ML;
+﻿using Microsoft.ML;
 using Tiktack.Web.ApiML.Model.DataModels;
 
 namespace Titkack.Web.BusinessLayer
@@ -27,7 +25,6 @@ namespace Titkack.Web.BusinessLayer
             {
                 SentimentText = message
             };
-
             // Try model on sample data
             var result = _predictionEngine.Predict(input);
             return (result.Prediction, result.Score);

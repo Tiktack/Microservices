@@ -19,21 +19,17 @@ namespace Tiktack.Common.Core.Serializers
 
             var value = valuesList.First();
             var str = JsonConvert.SerializeObject(value.Value);
-            using (var sw = new StreamWriter(stream))
-            {
-                sw.Write(str);
-                sw.Flush();
-            }
+            using var sw = new StreamWriter(stream);
+            sw.Write(str);
+            sw.Flush();
         }
 
         public object Deserialize(Stream stream, Type type)
         {
-            using (var s = new StreamReader(stream))
-            {
-                var str = s.ReadToEnd();
-                var value = JsonConvert.DeserializeObject(str, type);
-                return value;
-            }
+            using var s = new StreamReader(stream);
+            var str = s.ReadToEnd();
+            var value = JsonConvert.DeserializeObject(str, type);
+            return value;
         }
     }
 }

@@ -1,6 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore.Internal;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Internal;
 using System;
-using Microsoft.EntityFrameworkCore;
 using Tiktack.WebGraphQL.DataLayer.Entities;
 using Tiktack.WebGraphQL.DataLayer.Infrastructure;
 

@@ -26,16 +26,14 @@ namespace Tiktack.Common.Core.Serializers
 
         public object Deserialize(Stream stream, Type type)
         {
-            using (var s = new StreamReader(stream))
-            {
-                var content = s.ReadToEnd();
-                object value;
-                if (type == typeof(string))
-                    value = content;
-                else
-                    throw new NotSupportedException();
-                return value;
-            }
+            using var s = new StreamReader(stream);
+            var content = s.ReadToEnd();
+            object value;
+            if (type == typeof(string))
+                value = content;
+            else
+                throw new NotSupportedException();
+            return value;
         }
     }
 }

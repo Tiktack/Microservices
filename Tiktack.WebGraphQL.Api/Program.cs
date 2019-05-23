@@ -15,6 +15,7 @@ namespace Tiktack.WebGraphQL.Api
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
+                    webBuilder.ConfigureKestrel(op => op.AllowSynchronousIO = true);
                 });
     }
 }
